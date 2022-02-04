@@ -43,6 +43,36 @@ void UART::puts(const char *str)
     }
 }
 
+void UART::getc(void)
+{
+    // wait for data
+    while(!(UCSR0A & (1 << RXC0)));
+
+    // return data
+    return UDR0;
+}
+
+void UART::getLine(char* buf, uint8_t n)
+{
+    uint8_t bufIdx = 0;
+    char c;
+
+    // while received character is not carriage return
+    // and end of buffer has not been reached
+    do
+    {
+        // receive character
+        c = UART_getc();
+
+        // store character in buffer
+        buf[bufIdx++] = c;
+    }
+    while((bufIdx < n) && (c != '\r'));
+
+    // ensure buffer is null terminated
+    buf[bufIdx] = 0;
+}
+
 ISR(USART_UDRE_vect)
 {
     UART::instance()->handle_udre();

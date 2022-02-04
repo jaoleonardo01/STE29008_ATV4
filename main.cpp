@@ -20,7 +20,23 @@ int main(void)
     char buff[32];
     unsigned char cycles;
     unsigned int adc_value;
-    while(true)
+    
+	//3-coletar coeficientes via UART
+	uart.puts("DIGITE OS COEFICIENTES SEM ESPACO\n");
+	
+    uint8_t bufRecSize = 5;
+    char bufRec[bufRecSize];
+
+    // get line from UART
+    uart.getLine(bufRec, bufRecSize);
+
+    // echo input
+    uart.puts("Valores recebidos: ");
+    uart.puts(bufRec);
+    uart.puts('\n');
+	
+	
+	while(true)
     {
         uart.puts("oi\n");
         led.high();
