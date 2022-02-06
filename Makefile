@@ -1,4 +1,4 @@
-OBJS := uart.o cycle_counter.o adc.o gpio.o fifo.o
+OBJS := uart.o cycle_counter.o adc.o gpio.o fifo.o buffer.o
 
 CXX_FLAGS := -mmcu=atmega328p
 

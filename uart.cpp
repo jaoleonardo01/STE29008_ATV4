@@ -43,7 +43,7 @@ void UART::puts(const char *str)
     }
 }
 
-void UART::getc(void)
+char UART::getc(void)
 {
     // wait for data
     while(!(UCSR0A & (1 << RXC0)));
@@ -52,9 +52,9 @@ void UART::getc(void)
     return UDR0;
 }
 
-void UART::getLine(char* buf, uint8_t n)
+void UART::getLine(char* buf, int n)
 {
-    uint8_t bufIdx = 0;
+    int bufIdx = 0;
     char c;
 
     // while received character is not carriage return
@@ -62,7 +62,7 @@ void UART::getLine(char* buf, uint8_t n)
     do
     {
         // receive character
-        c = UART_getc();
+        c = getc();
 
         // store character in buffer
         buf[bufIdx++] = c;

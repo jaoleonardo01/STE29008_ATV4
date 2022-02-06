@@ -10,8 +10,8 @@ public:
 
     void put(unsigned char c);
     void puts(const char *str);
-	void getc(void);
-	void getLine(char* buf, uint8_t n);
+	char getc(void);
+	void getLine(char* buf, int n);
     unsigned char get(); // TODO: tarefa
 
     void handle_udre();
